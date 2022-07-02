@@ -45,10 +45,5 @@
     &:focus {
       background-color: var(--blue-light);
     }
-
-    &:focus {
-      outline: 1px solid var(--purple-dark);
-      outline-offset: 1px;
-    }
   }
 }

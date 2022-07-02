@@ -16,6 +16,11 @@
   --red-danger: #e25858;
 }
 
+:focus {
+  outline: 2px solid var(--purple-dark);
+  outline-offset: 1px;
+}
+
 *,
 *::before,
 *::after {
