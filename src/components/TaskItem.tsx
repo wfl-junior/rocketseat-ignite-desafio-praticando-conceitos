@@ -27,14 +27,16 @@ export const TaskItem: React.FC<TaskItemProps> = ({ id, text, completed }) => {
           : styles.taskItem
       }
     >
-      <span
-        className={styles.checkbox}
-        tabIndex={0}
-        title="Alternar marcação de tarefa concluída"
-        onClick={handleToggleTaskCompleted}
-      >
-        {completed && <Check fontSize={11} weight="bold" />}
-      </span>
+      <div className={styles.checkboxContainer}>
+        <span
+          className={styles.checkbox}
+          tabIndex={0}
+          title="Alternar marcação de tarefa concluída"
+          onClick={handleToggleTaskCompleted}
+        >
+          {completed && <Check fontSize={11} weight="bold" />}
+        </span>
+      </div>
 
       <p onClick={handleToggleTaskCompleted}>{text}</p>
 
