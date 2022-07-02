@@ -1,31 +1,39 @@
 import { ClipboardText } from "phosphor-react";
+import { Fragment } from "react";
+import { useTasksContext } from "../contexts/TasksContext";
 import { TaskItem } from "./TaskItem";
 import styles from "./TaskList.module.scss";
 
 export const TaskList: React.FC = () => {
-  const tasks = ["todo"];
+  const { tasks, completedTaskCount } = useTasksContext();
 
   return (
     <div className={styles.taskList}>
       <header>
         <div className={styles.createdTasks}>
           <span>Tarefas criadas</span>
-          <span>0</span>
+          <span>{tasks.length}</span>
         </div>
 
         <div className={styles.completedTasks}>
           <span>Concluídas</span>
-          <span>0</span>
+          <span>
+            {tasks.length > 0 ? (
+              <Fragment>
+                {completedTaskCount} de {tasks.length}
+              </Fragment>
+            ) : (
+              "0"
+            )}
+          </span>
         </div>
       </header>
 
       {tasks.length > 0 ? (
         <div className={styles.tasks}>
-          <TaskItem completed={false} />
-          <TaskItem completed={false} />
-          <TaskItem completed={false} />
-          <TaskItem completed />
-          <TaskItem completed />
+          {tasks.map(task => (
+            <TaskItem key={task.id} {...task} />
+          ))}
         </div>
       ) : (
         <div className={styles.noTasks}>

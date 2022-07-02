@@ -1,15 +1,24 @@
 import { Check, Trash } from "phosphor-react";
+import { Task, useTasksContext } from "../contexts/TasksContext";
 import styles from "./TaskItem.module.scss";
 
-interface TaskItemProps {
-  completed: boolean;
-}
+type TaskItemProps = Task;
 
 function classNames(...classes: string[]) {
   return classes.join(" ");
 }
 
-export const TaskItem: React.FC<TaskItemProps> = ({ completed }) => {
+export const TaskItem: React.FC<TaskItemProps> = ({ id, text, completed }) => {
+  const { deleteTask, toggleTaskCompleted } = useTasksContext();
+
+  function handleToggleTaskCompleted() {
+    toggleTaskCompleted(id);
+  }
+
+  function handleDeleteTask() {
+    deleteTask(id);
+  }
+
   return (
     <div
       className={
@@ -21,17 +30,15 @@ export const TaskItem: React.FC<TaskItemProps> = ({ completed }) => {
       <span
         className={styles.checkbox}
         tabIndex={0}
-        title="Marcar como completa"
+        title="Alternar marcação de tarefa concluída"
+        onClick={handleToggleTaskCompleted}
       >
         {completed && <Check fontSize={11} weight="bold" />}
       </span>
 
-      <p>
-        Integer urna interdum massa libero auctor neque turpis turpis semper.
-        Duis vel sed fames integer.
-      </p>
+      <p onClick={handleToggleTaskCompleted}>{text}</p>
 
-      <button type="button">
+      <button type="button" onClick={handleDeleteTask}>
         <Trash fontSize={18} />
       </button>
     </div>

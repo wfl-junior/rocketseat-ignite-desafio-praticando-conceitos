@@ -35,7 +35,10 @@
   }
 
   > p {
+    cursor: pointer;
+
     font-size: 0.875rem;
+    flex: 1;
   }
 
   > button {
