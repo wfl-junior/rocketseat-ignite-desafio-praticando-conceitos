@@ -1,0 +1,26 @@
+.header {
+  background-color: var(--gray-700);
+  padding: 4.5rem 1rem 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    > strong {
+      font-weight: 900;
+      font-size: 2.5rem;
+
+      > span:first-child {
+        color: var(--blue-light);
+      }
+
+      > span:last-child {
+        color: var(--purple-dark);
+      }
+    }
+  }
+}
