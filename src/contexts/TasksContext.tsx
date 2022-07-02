@@ -1,13 +1,9 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from "react";
+import { createContext, useCallback, useContext, useMemo } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { useLocalStorageState } from "../hooks/useLocalStorageState";
 
 export interface Task {
-  id: number;
+  id: string;
   text: string;
   completed: boolean;
 }
@@ -28,26 +24,16 @@ interface TasksContextProviderProps {
   children: React.ReactNode;
 }
 
-function* getIdGenerator() {
-  let id = 0;
-
-  while (true) {
-    yield ++id;
-  }
-}
-
-const idGenerator = getIdGenerator();
-
 export const TasksContextProvider: React.FC<TasksContextProviderProps> = ({
   children,
 }) => {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useLocalStorageState<Task[]>("@todo:tasks", []);
 
   const addTask: TasksContextData["addTask"] = useCallback(taskText => {
     setTasks(tasks => [
       ...tasks,
       {
-        id: idGenerator.next().value!,
+        id: uuidv4(),
         text: taskText,
         completed: false,
       },
